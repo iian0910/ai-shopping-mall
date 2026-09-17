@@ -39,8 +39,18 @@ export default async function ProductsPage() {
               </div>
             )}
             <div className="p-4">
+              {product.category && (
+                <span className="mb-1 inline-block rounded-full bg-zinc-100 px-2 py-0.5 text-xs text-zinc-600 dark:bg-zinc-800 dark:text-zinc-300">
+                  {product.category}
+                </span>
+              )}
               <p className="font-medium text-zinc-900 dark:text-zinc-50">{product.name}</p>
-              <p className="text-sm text-zinc-500">${product.price}</p>
+              <p className="text-sm text-zinc-500">
+                ${product.price} ・ 庫存 {product.quantity ?? 0}
+              </p>
+              {product.description && (
+                <p className="mt-1 line-clamp-2 text-sm text-zinc-500">{product.description}</p>
+              )}
             </div>
           </div>
         ))}
