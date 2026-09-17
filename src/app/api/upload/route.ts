@@ -1,9 +1,15 @@
 import { handleUpload, type HandleUploadBody } from "@vercel/blob/client";
 import { NextResponse } from "next/server";
+import { getSession } from "@/lib/session";
 
 const MAX_FILE_SIZE = 20 * 1024 * 1024; // 20MB
 
 export async function POST(request: Request) {
+  const session = await getSession();
+  if (!session) {
+    return NextResponse.json({ error: "未授權，請先登入" }, { status: 401 });
+  }
+
   const body = (await request.json()) as HandleUploadBody;
 
   try {

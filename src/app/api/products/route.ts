@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { connectToDatabase } from "@/lib/mongodb";
 import { Product } from "@/models/Product";
 import { parseProductInput } from "@/lib/validateProduct";
+import { getSession } from "@/lib/session";
 
 export async function GET() {
   await connectToDatabase();
@@ -10,6 +11,11 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
+  const session = await getSession();
+  if (!session) {
+    return NextResponse.json({ error: "未授權，請先登入" }, { status: 401 });
+  }
+
   const body = await request.json();
   const result = parseProductInput(body);
   if (!result.success) {

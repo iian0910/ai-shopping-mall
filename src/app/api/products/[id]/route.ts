@@ -3,6 +3,7 @@ import { del } from "@vercel/blob";
 import { connectToDatabase } from "@/lib/mongodb";
 import { Product } from "@/models/Product";
 import { parseProductInput } from "@/lib/validateProduct";
+import { getSession } from "@/lib/session";
 
 export async function GET(
   _request: Request,
@@ -21,6 +22,11 @@ export async function PUT(
   request: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
+  const session = await getSession();
+  if (!session) {
+    return NextResponse.json({ error: "未授權，請先登入" }, { status: 401 });
+  }
+
   const { id } = await params;
   const body = await request.json();
   const result = parseProductInput(body);
@@ -45,6 +51,11 @@ export async function DELETE(
   _request: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
+  const session = await getSession();
+  if (!session) {
+    return NextResponse.json({ error: "未授權，請先登入" }, { status: 401 });
+  }
+
   const { id } = await params;
   await connectToDatabase();
   const product = await Product.findByIdAndDelete(id);
