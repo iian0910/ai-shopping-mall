@@ -1,13 +1,17 @@
-import { NextResponse } from "next/server";
+import { NextResponse, type NextRequest } from "next/server";
 import { connectToDatabase } from "@/lib/mongodb";
 import { Product } from "@/models/Product";
 import { parseProductInput } from "@/lib/validateProduct";
 import { getSession } from "@/lib/session";
+import { getProducts, PRODUCTS_PAGE_SIZE } from "@/lib/products";
 
-export async function GET() {
-  await connectToDatabase();
-  const products = await Product.find().sort({ createdAt: -1 });
-  return NextResponse.json(products);
+export async function GET(request: NextRequest) {
+  const { searchParams } = request.nextUrl;
+  const category = searchParams.get("category") ?? undefined;
+  const page = Number(searchParams.get("page")) || 1;
+
+  const result = await getProducts({ category, page, limit: PRODUCTS_PAGE_SIZE });
+  return NextResponse.json(result);
 }
 
 export async function POST(request: Request) {
