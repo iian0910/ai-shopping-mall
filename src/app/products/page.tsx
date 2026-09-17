@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { connectToDatabase } from "@/lib/mongodb";
 import { Product, type IProduct } from "@/models/Product";
+import { formatNumber } from "@/lib/format";
 
 export const dynamic = "force-dynamic";
 
@@ -13,7 +14,7 @@ export default async function ProductsPage() {
       <div className="mb-8 flex items-center justify-between">
         <h1 className="text-2xl font-semibold text-zinc-900 dark:text-zinc-50">商品列表</h1>
         <Link
-          href="/products/new"
+          href="/dashboard/products/new"
           className="rounded-md bg-zinc-900 px-4 py-2 text-sm font-medium text-white hover:bg-zinc-700 dark:bg-zinc-50 dark:text-zinc-900"
         >
           新增商品
@@ -46,7 +47,7 @@ export default async function ProductsPage() {
               )}
               <p className="font-medium text-zinc-900 dark:text-zinc-50">{product.name}</p>
               <p className="text-sm text-zinc-500">
-                ${product.price} ・ 庫存 {product.quantity ?? 0}
+                ${formatNumber(product.price)} ・ 庫存 {formatNumber(product.quantity ?? 0)}
               </p>
               {product.description && (
                 <p className="mt-1 line-clamp-2 text-sm text-zinc-500">{product.description}</p>

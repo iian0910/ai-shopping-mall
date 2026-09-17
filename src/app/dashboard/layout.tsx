@@ -3,8 +3,8 @@ import LogoutButton from "@/components/LogoutButton";
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex min-h-screen">
-      <aside className="flex w-56 shrink-0 flex-col justify-between border-r border-zinc-200 bg-zinc-50 p-6 dark:border-zinc-800 dark:bg-zinc-950">
+    <div className="flex h-screen overflow-hidden">
+      <aside className="flex h-full w-56 shrink-0 flex-col justify-between overflow-y-auto border-r border-zinc-200 bg-zinc-50 p-6 dark:border-zinc-800 dark:bg-zinc-950">
         <div>
           <h2 className="mb-6 text-lg font-semibold text-zinc-900 dark:text-zinc-50">後台管理</h2>
           <nav className="flex flex-col gap-1">
@@ -24,7 +24,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         </div>
         <LogoutButton />
       </aside>
-      <main className="flex-1 bg-white dark:bg-black">{children}</main>
+      <main className="h-full flex-1 overflow-y-auto bg-white dark:bg-black">{children}</main>
     </div>
   );
 }
