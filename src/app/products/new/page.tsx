@@ -60,7 +60,7 @@ export default function NewProductPage() {
       for (let i = 0; i < files.length; i++) {
         const file = files[i];
         setProgress(`上傳圖片中 (${i + 1}/${files.length})...`);
-        const blob = await upload(file.name, file, {
+        const blob = await upload(`products/${Date.now()}-${file.name}`, file, {
           access: "public",
           handleUploadUrl: "/api/upload",
         });

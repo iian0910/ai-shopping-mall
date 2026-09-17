@@ -10,7 +10,10 @@ export async function POST(request: Request) {
     const jsonResponse = await handleUpload({
       body,
       request,
-      onBeforeGenerateToken: async () => {
+      onBeforeGenerateToken: async (pathname) => {
+        if (!pathname.startsWith("products/")) {
+          throw new Error("圖片必須上傳到 products/ 資料夾");
+        }
         return {
           allowedContentTypes: ["image/jpeg", "image/png", "image/webp", "image/gif"],
           maximumSizeInBytes: MAX_FILE_SIZE,
