@@ -13,7 +13,7 @@ export default function ProductGallery({
 
   if (images.length === 0) {
     return (
-      <div className="flex aspect-square w-full items-center justify-center rounded-lg border border-zinc-200 bg-zinc-100 text-sm text-zinc-400 dark:border-zinc-700 dark:bg-zinc-800">
+      <div className="flex aspect-square w-full items-center justify-center rounded-[1.75rem] border border-primary/40 bg-primary/10 text-sm text-slate-400 dark:border-slate-700 dark:bg-slate-800">
         無圖片
       </div>
     );
@@ -21,7 +21,7 @@ export default function ProductGallery({
 
   return (
     <div>
-      <div className="relative overflow-hidden rounded-lg border border-zinc-200 dark:border-zinc-700">
+      <div className="relative overflow-hidden rounded-[1.75rem] shadow-sm ring-1 ring-primary/15 dark:ring-slate-800">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={images[activeIndex]}
@@ -54,10 +54,10 @@ export default function ProductGallery({
               type="button"
               onClick={() => setActiveIndex(index)}
               aria-label={`顯示第 ${index + 1} 張圖片`}
-              className={`h-20 w-20 shrink-0 snap-start overflow-hidden rounded-md border transition ${
+              className={`h-20 w-20 shrink-0 snap-start overflow-hidden rounded-2xl border transition hover:-translate-y-0.5 ${
                 index === activeIndex
-                  ? "border-amber-500 ring-2 ring-amber-500/40"
-                  : "border-zinc-200 dark:border-zinc-700"
+                  ? "border-accent ring-2 ring-accent/40"
+                  : "border-primary/40 dark:border-slate-700"
               }`}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}

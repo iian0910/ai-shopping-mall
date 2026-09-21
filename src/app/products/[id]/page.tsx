@@ -5,6 +5,7 @@ import { connectToDatabase } from "@/lib/mongodb";
 import { Product, type IProduct } from "@/models/Product";
 import { formatNumber } from "@/lib/format";
 import ProductGallery from "@/components/ProductGallery";
+import HeartIcon from "@/components/HeartIcon";
 
 export const dynamic = "force-dynamic";
 
@@ -29,36 +30,40 @@ export default async function ProductDetailPage({
   const inStock = product.quantity > 0;
 
   return (
-    <div className="mx-auto w-full max-w-[1120px] px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
-      <p className="mb-8 text-sm text-zinc-500">
-        <Link href="/" className="hover:text-zinc-700 dark:hover:text-zinc-300">
+    <div className="relative mx-auto w-full max-w-[1120px] overflow-hidden px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
+      <div className="pointer-events-none absolute -left-16 top-10 h-40 w-40 rounded-full bg-support/20 blur-3xl" />
+      <div className="pointer-events-none absolute -right-16 bottom-10 h-48 w-48 rounded-full bg-secondary/20 blur-3xl" />
+
+      <p className="relative mb-8 text-sm text-slate-500">
+        <Link href="/" className="hover:text-slate-700 dark:hover:text-slate-300">
           首頁
         </Link>{" "}
         /{" "}
-        <Link href="/products" className="hover:text-zinc-700 dark:hover:text-zinc-300">
+        <Link href="/products" className="hover:text-slate-700 dark:hover:text-slate-300">
           商品
         </Link>{" "}
         / {product.name}
       </p>
 
-      <div className="grid grid-cols-1 gap-10 md:grid-cols-2">
+      <div className="relative grid grid-cols-1 gap-10 md:grid-cols-2">
         <ProductGallery images={product.images ?? []} alt={product.name} />
 
-        <div>
-          <span className="mb-3 inline-block rounded-full bg-zinc-100 px-2 py-0.5 text-xs text-zinc-600 dark:bg-zinc-800 dark:text-zinc-300">
+        <div className="rounded-[2rem] bg-white/70 p-6 shadow-sm ring-1 ring-primary/15 dark:bg-slate-900/60 dark:ring-slate-800">
+          <span className="mb-3 inline-flex items-center gap-1 rounded-full bg-support/30 px-3 py-1 text-xs font-semibold text-ink dark:bg-slate-800 dark:text-slate-300">
+            <HeartIcon className="h-3 w-3" />
             {product.category}
           </span>
-          <h1 className="text-2xl font-semibold text-zinc-900 dark:text-zinc-50">
+          <h1 className="text-2xl font-semibold text-ink dark:text-slate-50">
             {product.name}
           </h1>
-          <p className="mt-3 text-3xl font-bold text-amber-600 dark:text-amber-400">
+          <p className="mt-3 text-3xl font-bold text-ink dark:text-secondary">
             ${formatNumber(product.price)}
           </p>
 
           <button
             type="button"
             disabled={!inStock}
-            className="mt-6 flex w-full items-center justify-center gap-2 rounded-full bg-amber-400 px-6 py-3 text-sm font-semibold text-zinc-900 transition hover:bg-amber-300 disabled:cursor-not-allowed disabled:bg-zinc-200 disabled:text-zinc-400 dark:disabled:bg-zinc-800 dark:disabled:text-zinc-500 sm:w-auto"
+            className="mt-6 flex w-full items-center justify-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-accent-content shadow-sm transition hover:-translate-y-0.5 hover:brightness-95 disabled:cursor-not-allowed disabled:translate-y-0 disabled:bg-slate-200 disabled:text-slate-400 disabled:shadow-none dark:disabled:bg-slate-800 dark:disabled:text-slate-500 sm:w-auto"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -79,11 +84,11 @@ export default async function ProductDetailPage({
           </button>
 
           {product.description && (
-            <div className="mt-10 border-t border-zinc-200 pt-6 dark:border-zinc-800">
-              <h2 className="mb-3 text-sm font-semibold text-zinc-900 dark:text-zinc-50">
+            <div className="mt-10 border-t border-dashed border-primary/40 pt-6 dark:border-slate-800">
+              <h2 className="mb-3 text-sm font-semibold text-ink dark:text-slate-50">
                 商品描述
               </h2>
-              <p className="whitespace-pre-line text-sm leading-relaxed text-zinc-600 dark:text-zinc-300">
+              <p className="whitespace-pre-line text-sm leading-relaxed text-slate-600 dark:text-slate-300">
                 {product.description}
               </p>
             </div>

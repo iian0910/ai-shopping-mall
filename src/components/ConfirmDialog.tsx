@@ -52,16 +52,16 @@ export default function ConfirmDialog({
     >
       <div
         ref={dialogRef}
-        className="w-full max-w-sm rounded-lg bg-white p-6 shadow-xl dark:bg-zinc-900"
+        className="w-full max-w-sm rounded-[1.75rem] bg-white p-6 shadow-xl ring-1 ring-primary/15 dark:bg-slate-900 dark:ring-slate-800"
       >
         <h2
           id="confirm-dialog-title"
-          className="text-base font-semibold text-zinc-900 dark:text-zinc-50"
+          className="text-base font-semibold text-ink dark:text-slate-50"
         >
           {title}
         </h2>
         {description && (
-          <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">{description}</p>
+          <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">{description}</p>
         )}
         {error && <p className="mt-2 text-sm text-red-600">{error}</p>}
 
@@ -70,7 +70,7 @@ export default function ConfirmDialog({
             type="button"
             onClick={onCancel}
             disabled={loading}
-            className="rounded-md border border-zinc-300 px-4 py-2 text-sm font-medium text-zinc-700 hover:bg-zinc-100 disabled:opacity-50 dark:border-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-800"
+            className="rounded-full border border-slate-300 px-4 py-2 text-sm font-medium text-slate-700 transition hover:-translate-y-0.5 hover:bg-primary/20 disabled:translate-y-0 disabled:opacity-50 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800"
           >
             {cancelText}
           </button>
@@ -78,10 +78,10 @@ export default function ConfirmDialog({
             type="button"
             onClick={onConfirm}
             disabled={loading}
-            className={`rounded-md px-4 py-2 text-sm font-medium text-white disabled:opacity-50 ${
+            className={`rounded-full px-4 py-2 text-sm font-medium transition hover:-translate-y-0.5 disabled:translate-y-0 disabled:opacity-50 ${
               confirmVariant === "danger"
-                ? "bg-red-600 hover:bg-red-700"
-                : "bg-zinc-900 hover:bg-zinc-700 dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-200"
+                ? "bg-red-600 text-white hover:bg-red-700"
+                : "bg-accent text-accent-content hover:brightness-95"
             }`}
           >
             {loading ? "處理中..." : confirmText}

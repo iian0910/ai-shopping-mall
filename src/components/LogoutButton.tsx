@@ -23,7 +23,7 @@ export default function LogoutButton() {
       type="button"
       onClick={handleLogout}
       disabled={loading}
-      className="rounded-md px-3 py-2 text-left text-sm font-medium text-zinc-700 hover:bg-zinc-200 disabled:opacity-50 dark:text-zinc-300 dark:hover:bg-zinc-800"
+      className="rounded-full px-3 py-2 text-left text-sm font-medium text-slate-700 transition hover:-translate-y-0.5 hover:bg-primary/40 disabled:opacity-50 disabled:translate-y-0 dark:text-slate-300 dark:hover:bg-slate-800"
     >
       {loading ? "登出中..." : "登出"}
     </button>

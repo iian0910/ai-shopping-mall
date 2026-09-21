@@ -2,6 +2,7 @@ import Link from "next/link";
 import { getProducts } from "@/lib/products";
 import { PRODUCT_CATEGORIES } from "@/lib/constants";
 import ProductCard from "@/components/ProductCard";
+import HeartIcon from "@/components/HeartIcon";
 
 export const dynamic = "force-dynamic";
 
@@ -9,6 +10,7 @@ const VALUE_PROPS = [
   {
     title: "分類齊全",
     description: "多元商品分類，快速找到你想要的商品。",
+    accent: "bg-primary text-white dark:bg-slate-800 dark:text-primary",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6} className="h-7 w-7">
         <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 3.75h6v6h-6v-6ZM14.25 3.75h6v6h-6v-6ZM3.75 14.25h6v6h-6v-6ZM14.25 14.25h6v6h-6v-6Z" />
@@ -18,6 +20,7 @@ const VALUE_PROPS = [
   {
     title: "即時更新",
     description: "後台管理即時同步商品資訊與庫存狀態。",
+    accent: "bg-support text-ink dark:bg-slate-800 dark:text-support",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6} className="h-7 w-7">
         <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
@@ -27,6 +30,7 @@ const VALUE_PROPS = [
   {
     title: "簡單瀏覽",
     description: "直覺化的商品頁面設計，輕鬆比較商品內容。",
+    accent: "bg-accent text-accent-content dark:bg-slate-800 dark:text-accent",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6} className="h-7 w-7">
         <path strokeLinecap="round" strokeLinejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
@@ -41,23 +45,26 @@ export default async function Home() {
 
   return (
     <div>
-      <header className="border-b border-zinc-200 dark:border-zinc-800">
+      <header className="sticky top-0 z-50 border-b border-primary/40 bg-white/80 backdrop-blur-md dark:border-slate-800/70 dark:bg-slate-900/80">
         <div className="mx-auto flex w-full max-w-[1120px] items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-          <Link href="/" className="text-lg font-bold text-zinc-900 dark:text-zinc-50">
+          <Link href="/" className="flex items-center gap-2 text-lg font-bold text-ink dark:text-slate-50">
+            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-accent text-accent-content">
+              <HeartIcon className="h-4 w-4" />
+            </span>
             AI Shopping Mall
           </Link>
           <div className="flex items-center gap-6">
-            <nav className="hidden items-center gap-6 text-sm font-medium text-zinc-600 dark:text-zinc-300 sm:flex">
-              <Link href="/" className="hover:text-zinc-900 dark:hover:text-zinc-50">
+            <nav className="hidden items-center gap-2 text-sm font-medium text-slate-600 dark:text-slate-300 sm:flex">
+              <Link href="/" className="rounded-full px-3 py-1.5 transition hover:bg-primary/20 hover:text-ink dark:hover:text-slate-50">
                 首頁
               </Link>
-              <Link href="/products" className="hover:text-zinc-900 dark:hover:text-zinc-50">
+              <Link href="/products" className="rounded-full px-3 py-1.5 transition hover:bg-primary/20 hover:text-ink dark:hover:text-slate-50">
                 所有商品
               </Link>
             </nav>
             <span
               aria-label="購物車"
-              className="flex h-9 w-9 items-center justify-center rounded-full border border-zinc-200 text-zinc-700 dark:border-zinc-700 dark:text-zinc-200"
+              className="flex h-9 w-9 items-center justify-center rounded-full border border-primary/60 bg-primary/10 text-ink dark:border-slate-700 dark:bg-transparent dark:text-slate-200"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -79,53 +86,72 @@ export default async function Home() {
         </div>
       </header>
 
-      <section className="relative overflow-hidden bg-gradient-to-br from-orange-50 via-amber-50 to-orange-100 dark:from-zinc-900 dark:via-zinc-900 dark:to-zinc-800">
-        <div className="pointer-events-none absolute -right-16 -top-16 h-64 w-64 rounded-full bg-amber-200/60 blur-3xl dark:bg-amber-500/10" />
-        <div className="pointer-events-none absolute -bottom-20 right-24 h-56 w-56 rounded-full bg-orange-300/40 blur-3xl dark:bg-orange-500/10" />
+      <section
+        className="relative overflow-hidden bg-cover bg-center"
+        style={{ backgroundImage: "url(/hero-bg.webp)" }}
+      >
+        <div className="relative mx-auto flex w-full min-w-0 max-w-[1400px] flex-col items-center gap-8 px-6 py-12 sm:gap-10 sm:px-10 sm:py-16 lg:flex-row lg:justify-center lg:gap-16 lg:py-20">
+          <div className="w-full min-w-0 max-w-md rounded-[2rem] bg-white/70 p-6 text-center shadow-sm ring-1 ring-primary/15 backdrop-blur-sm sm:p-8 lg:w-auto lg:max-w-lg lg:flex-1 lg:text-left">
+            <h1 className="font-hero text-2xl font-bold text-ink sm:text-3xl lg:text-4xl xl:text-5xl">
+              每個小朋友，都需要一位抱抱好朋友
+            </h1>
+            <p className="font-hero mt-3 text-sm text-[#7a5645] sm:text-base lg:text-lg">
+              開心的時候一起笑，難過的時候抱一抱。
+              <br />
+              找到屬於你的小動物，陪你一起長大。
+            </p>
+            <Link
+              href="/products"
+              className="mt-6 inline-flex items-center justify-center rounded-full bg-accent px-6 py-3 text-sm font-semibold text-accent-content shadow-lg transition hover:-translate-y-0.5 hover:brightness-95 sm:text-base"
+            >
+              查看所有商品
+            </Link>
+          </div>
 
-        <div className="relative mx-auto w-full max-w-[1120px] px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
-          <span className="inline-block rounded-full bg-white/70 px-3 py-1 text-xs font-semibold text-amber-700 ring-1 ring-amber-600/20 dark:bg-zinc-800/70 dark:text-amber-400">
-            歡迎光臨
-          </span>
-          <h1 className="mt-4 max-w-xl text-4xl font-bold leading-tight text-zinc-900 dark:text-zinc-50 sm:text-5xl">
-            簡單購物，
-            <br />
-            從瀏覽開始
-          </h1>
-          <p className="mt-4 max-w-md text-base text-zinc-600 dark:text-zinc-300">
-            精心分類的商品目錄，搭配直覺的頁面設計，讓你快速找到喜歡的商品。
-          </p>
-          <Link
-            href="/products"
-            className="mt-8 inline-flex items-center justify-center rounded-full bg-amber-400 px-6 py-3 text-sm font-semibold text-zinc-900 transition hover:bg-amber-300"
-          >
-            查看所有商品
-          </Link>
+          <div className="w-full max-w-[280px] sm:max-w-xs lg:max-w-md lg:flex-1">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/hero-photo.webp"
+              alt="熊熊和兔兔玩偶"
+              className="w-full drop-shadow-[0_18px_20px_rgba(91,58,41,0.25)]"
+            />
+          </div>
         </div>
       </section>
 
-      <section className="mx-auto w-full max-w-[1120px] px-4 py-16 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-10 sm:grid-cols-3">
+      <section className="relative mx-auto w-full max-w-[1120px] overflow-hidden px-4 py-16 sm:px-6 lg:px-8">
+        <div className="pointer-events-none absolute -left-10 top-4 h-28 w-28 rounded-full bg-support/20 blur-2xl" />
+        <div className="pointer-events-none absolute -right-10 bottom-0 h-32 w-32 rounded-full bg-secondary/20 blur-2xl" />
+        <div className="relative grid grid-cols-1 gap-6 sm:grid-cols-3">
           {VALUE_PROPS.map((item) => (
-            <div key={item.title} className="flex flex-col items-center text-center">
-              <div className="flex h-14 w-14 items-center justify-center rounded-full bg-amber-100 text-amber-600 dark:bg-zinc-800 dark:text-amber-400">
+            <div
+              key={item.title}
+              className="flex flex-col items-center rounded-[2rem] bg-white/70 p-6 text-center shadow-sm ring-1 ring-primary/15 transition hover:-translate-y-1 hover:shadow-md dark:bg-slate-900/60 dark:ring-slate-800"
+            >
+              <div className={`flex h-14 w-14 items-center justify-center rounded-full ${item.accent}`}>
                 {item.icon}
               </div>
-              <h3 className="mt-4 text-base font-semibold text-zinc-900 dark:text-zinc-50">
+              <h3 className="mt-4 text-base font-semibold text-ink dark:text-slate-50">
                 {item.title}
               </h3>
-              <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-400">{item.description}</p>
+              <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">{item.description}</p>
             </div>
           ))}
         </div>
       </section>
 
       <section className="mx-auto w-full max-w-[1120px] px-4 py-16 sm:px-6 lg:px-8">
-        <div className="mb-8 flex items-center justify-between">
-          <h2 className="text-2xl font-bold text-zinc-900 dark:text-zinc-50">精選商品</h2>
+        <div className="mb-8 flex flex-wrap items-center justify-between gap-3">
+          <div>
+            <span className="mb-2 inline-flex items-center gap-1 rounded-full bg-accent/15 px-3 py-1 text-xs font-semibold text-accent-content ring-1 ring-accent/30 dark:bg-accent/20 dark:text-accent dark:ring-accent/40">
+              <HeartIcon className="h-3 w-3" />
+              本週嚴選
+            </span>
+            <h2 className="text-2xl font-bold text-ink dark:text-slate-50">精選商品</h2>
+          </div>
           <Link
             href="/products"
-            className="text-sm font-medium text-amber-600 hover:text-amber-500 dark:text-amber-400"
+            className="rounded-full border border-primary/40 px-4 py-2 text-sm font-medium text-ink/80 transition hover:bg-primary/15 hover:text-ink dark:border-slate-700 dark:text-slate-300 dark:hover:text-slate-50"
           >
             查看全部 →
           </Link>
@@ -138,28 +164,40 @@ export default async function Home() {
             ))}
           </div>
         ) : (
-          <p className="py-12 text-center text-sm text-zinc-500">目前尚無上架商品。</p>
+          <p className="py-12 text-center text-sm text-slate-500">目前尚無上架商品。</p>
         )}
       </section>
 
-      <section className="bg-zinc-900 py-16 dark:bg-zinc-950">
-        <div className="mx-auto flex w-full max-w-[1120px] flex-col items-center gap-6 px-4 text-center sm:px-6 lg:px-8">
-          <h2 className="text-2xl font-bold text-white sm:text-3xl">準備好開始選購了嗎？</h2>
-          <p className="max-w-md text-sm text-zinc-300">
-            瀏覽{PRODUCT_CATEGORIES.length} 大分類，探索所有上架商品。
-          </p>
-          <Link
-            href="/products"
-            className="inline-flex items-center justify-center rounded-full bg-amber-400 px-6 py-3 text-sm font-semibold text-zinc-900 transition hover:bg-amber-300"
-          >
-            開始購物
-          </Link>
+      <section className="px-4 py-10 sm:px-6 lg:px-8">
+        <div className="relative mx-auto w-full max-w-[1120px] overflow-hidden rounded-[2.5rem] bg-ink py-16">
+          <div className="pointer-events-none absolute -left-8 -top-8 h-40 w-40 rounded-full bg-accent/20 blur-3xl" />
+          <div className="pointer-events-none absolute -right-6 bottom-0 h-36 w-36 rounded-full bg-secondary/20 blur-3xl" />
+          <div className="pointer-events-none absolute right-1/4 top-6 h-20 w-20 rounded-full bg-support/20 blur-2xl" />
+
+          <div className="relative mx-auto flex w-full max-w-[1120px] flex-col items-center gap-6 px-4 text-center sm:px-6 lg:px-8">
+            <span className="flex h-12 w-12 items-center justify-center rounded-full bg-accent/20 text-accent">
+              <HeartIcon className="h-6 w-6" />
+            </span>
+            <h2 className="text-2xl font-bold text-white sm:text-3xl">準備好開始選購了嗎？</h2>
+            <p className="max-w-md text-sm text-secondary">
+              瀏覽{PRODUCT_CATEGORIES.length} 大分類，探索所有上架商品。
+            </p>
+            <Link
+              href="/products"
+              className="inline-flex items-center justify-center rounded-full bg-accent px-6 py-3 text-sm font-semibold text-accent-content transition hover:-translate-y-0.5 hover:brightness-95"
+            >
+              開始購物
+            </Link>
+          </div>
         </div>
       </section>
 
-      <footer className="border-t border-zinc-200 py-8 dark:border-zinc-800">
-        <div className="mx-auto w-full max-w-[1120px] px-4 text-center text-xs text-zinc-500 sm:px-6 lg:px-8">
-          © {new Date().getFullYear()} AI Shopping Mall
+      <footer className="py-8">
+        <div className="mx-auto flex w-full max-w-[1120px] flex-col items-center gap-1 px-4 text-center text-xs text-slate-500 sm:px-6 lg:px-8">
+          <span className="flex items-center gap-1">
+            © {new Date().getFullYear()} AI Shopping Mall · Made with
+            <HeartIcon className="h-3 w-3 text-accent" />
+          </span>
         </div>
       </footer>
     </div>

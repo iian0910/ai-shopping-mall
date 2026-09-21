@@ -1,8 +1,30 @@
 @import "tailwindcss";
 
+/* This storefront is always warm & light — dark mode is opt-in only via a
+   ".dark" ancestor class, which nothing in this app ever applies. This keeps
+   the cozy palette stable regardless of the visitor's OS/browser color-scheme
+   preference. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Playful rounded font for the homepage hero — subset to only the hero's own
+   copy, so it stays tiny (~8KB). Never use font-hero outside the hero section. */
+@font-face {
+  font-family: "jf-openhuninn-hero";
+  src: url("/jf-openhuninn-subset.woff2") format("woff2");
+  font-weight: 400 900;
+  font-display: swap;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #fffaf3;
+  --foreground: #5b3a29;
+
+  /* brand palette: warm & cozy, matches the nursery hero */
+  --color-brand-primary: #fce4d6;
+  --color-brand-secondary: #f6c39a;
+  --color-brand-accent: #e88d67;
+  --color-brand-support: #c99a6c;
+  --color-brand-ink: #5b3a29;
 }
 
 @theme inline {
@@ -10,13 +32,18 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-primary: var(--color-brand-primary);
+  --color-primary-content: var(--color-brand-ink);
+  --color-secondary: var(--color-brand-secondary);
+  --color-secondary-content: var(--color-brand-ink);
+  --color-accent: var(--color-brand-accent);
+  --color-accent-content: var(--color-brand-ink);
+  --color-support: var(--color-brand-support);
+  --color-support-content: var(--color-brand-ink);
+  --color-ink: var(--color-brand-ink);
+
+  --font-hero: "jf-openhuninn-hero", "DFKai-SB", "標楷體", "PingFang TC", "Microsoft JhengHei", sans-serif;
 }
 
 body {

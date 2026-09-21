@@ -1,22 +1,28 @@
 import Link from "next/link";
 import LogoutButton from "@/components/LogoutButton";
+import HeartIcon from "@/components/HeartIcon";
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex h-screen overflow-hidden">
-      <aside className="flex h-full w-56 shrink-0 flex-col justify-between overflow-y-auto border-r border-zinc-200 bg-zinc-50 p-6 dark:border-zinc-800 dark:bg-zinc-950">
+      <aside className="flex h-full w-56 shrink-0 flex-col justify-between overflow-y-auto border-r border-primary/30 bg-primary/10 p-6 dark:border-slate-800 dark:bg-slate-950">
         <div>
-          <h2 className="mb-6 text-lg font-semibold text-zinc-900 dark:text-zinc-50">後台管理</h2>
+          <h2 className="mb-6 flex items-center gap-2 text-lg font-semibold text-ink dark:text-slate-50">
+            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-accent text-accent-content">
+              <HeartIcon className="h-4 w-4" />
+            </span>
+            後台管理
+          </h2>
           <nav className="flex flex-col gap-1">
             <Link
               href="/dashboard/products"
-              className="rounded-md px-3 py-2 text-sm font-medium text-zinc-700 hover:bg-zinc-200 dark:text-zinc-300 dark:hover:bg-zinc-800"
+              className="rounded-full px-3 py-2 text-sm font-medium text-slate-700 transition hover:-translate-y-0.5 hover:bg-primary/40 dark:text-slate-300 dark:hover:bg-slate-800"
             >
               商品列表
             </Link>
             <Link
               href="/dashboard/products/new"
-              className="rounded-md px-3 py-2 text-sm font-medium text-zinc-700 hover:bg-zinc-200 dark:text-zinc-300 dark:hover:bg-zinc-800"
+              className="rounded-full px-3 py-2 text-sm font-medium text-slate-700 transition hover:-translate-y-0.5 hover:bg-primary/40 dark:text-slate-300 dark:hover:bg-slate-800"
             >
               新增商品
             </Link>
@@ -24,7 +30,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         </div>
         <LogoutButton />
       </aside>
-      <main className="h-full flex-1 overflow-y-auto bg-white dark:bg-black">{children}</main>
+      <main className="h-full flex-1 overflow-y-auto bg-white dark:bg-slate-950">{children}</main>
     </div>
   );
 }

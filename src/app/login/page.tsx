@@ -2,6 +2,7 @@
 
 import { Suspense, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import HeartIcon from "@/components/HeartIcon";
 
 function LoginForm() {
   const router = useRouter();
@@ -39,12 +40,17 @@ function LoginForm() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 dark:bg-black">
-      <div className="w-full max-w-sm rounded-lg border border-zinc-200 bg-white p-8 dark:border-zinc-800 dark:bg-zinc-950">
-        <h1 className="mb-6 text-xl font-semibold text-zinc-900 dark:text-zinc-50">管理員登入</h1>
+    <div className="flex min-h-screen items-center justify-center bg-primary/15 dark:bg-slate-950">
+      <div className="w-full max-w-sm rounded-[1.75rem] border border-primary/30 bg-white p-8 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+        <div className="mb-6 flex items-center gap-2">
+          <span className="flex h-9 w-9 items-center justify-center rounded-full bg-accent text-accent-content">
+            <HeartIcon className="h-4 w-4" />
+          </span>
+          <h1 className="text-xl font-semibold text-ink dark:text-slate-50">管理員登入</h1>
+        </div>
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <div className="flex flex-col gap-2">
-            <label htmlFor="email" className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
+            <label htmlFor="email" className="text-sm font-medium text-slate-700 dark:text-slate-300">
               帳號
             </label>
             <input
@@ -52,13 +58,13 @@ function LoginForm() {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="rounded-md border border-zinc-300 px-3 py-2 text-sm outline-none focus:border-zinc-500 dark:border-zinc-700 dark:bg-zinc-900"
+              className="rounded-2xl border border-slate-300 px-3 py-2 text-sm outline-none focus:border-secondary dark:border-slate-700 dark:bg-slate-900"
               placeholder="admin@test.com"
               autoComplete="username"
             />
           </div>
           <div className="flex flex-col gap-2">
-            <label htmlFor="password" className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
+            <label htmlFor="password" className="text-sm font-medium text-slate-700 dark:text-slate-300">
               密碼
             </label>
             <input
@@ -66,7 +72,7 @@ function LoginForm() {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="rounded-md border border-zinc-300 px-3 py-2 text-sm outline-none focus:border-zinc-500 dark:border-zinc-700 dark:bg-zinc-900"
+              className="rounded-2xl border border-slate-300 px-3 py-2 text-sm outline-none focus:border-secondary dark:border-slate-700 dark:bg-slate-900"
               placeholder="••••••••"
               autoComplete="current-password"
             />
@@ -77,7 +83,7 @@ function LoginForm() {
           <button
             type="submit"
             disabled={submitting}
-            className="mt-2 rounded-md bg-zinc-900 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-zinc-700 disabled:opacity-50 dark:bg-zinc-50 dark:text-zinc-900"
+            className="mt-2 rounded-full bg-accent px-4 py-2 text-sm font-medium text-accent-content shadow-sm transition hover:-translate-y-0.5 hover:brightness-95 disabled:translate-y-0 disabled:opacity-50"
           >
             {submitting ? "登入中..." : "登入"}
           </button>

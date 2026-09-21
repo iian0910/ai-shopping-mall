@@ -6,7 +6,7 @@ export default function ProductCard({ product }: { product: IProduct }) {
   return (
     <Link
       href={`/products/${product._id}`}
-      className="flex flex-col overflow-hidden rounded-3xl bg-orange-50 p-3 shadow-sm ring-1 ring-black/5 transition hover:shadow-md dark:bg-zinc-900 dark:ring-white/10"
+      className="flex flex-col overflow-hidden rounded-[1.75rem] bg-white p-3 shadow-sm ring-1 ring-black/5 transition hover:-translate-y-1 hover:shadow-lg dark:bg-slate-900 dark:ring-white/10"
     >
       {product.images?.[0] ? (
         // eslint-disable-next-line @next/next/no-img-element
@@ -16,22 +16,24 @@ export default function ProductCard({ product }: { product: IProduct }) {
           className="aspect-[4/3] w-full rounded-2xl object-cover"
         />
       ) : (
-        <div className="flex aspect-[4/3] w-full items-center justify-center rounded-2xl bg-orange-100 text-sm text-zinc-400 dark:bg-zinc-800">
+        <div className="flex aspect-[4/3] w-full items-center justify-center rounded-2xl bg-primary/20 text-sm text-slate-400 dark:bg-slate-800">
           無圖片
         </div>
       )}
 
       <div className="flex flex-1 flex-col px-1 pt-4">
-        <p className="text-base font-bold text-zinc-900 dark:text-zinc-50">{product.name}</p>
-        <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">{product.category}</p>
+        <p className="text-base font-bold text-slate-800 dark:text-slate-50">{product.name}</p>
+        <span className="mt-1.5 inline-block w-fit rounded-full bg-support/25 px-2 py-0.5 text-[11px] font-medium text-ink dark:bg-slate-800 dark:text-slate-300">
+          {product.category}
+        </span>
 
         <div className="mt-auto flex items-center justify-between pt-4">
-          <p className="text-xl font-bold text-amber-600 dark:text-amber-400">
+          <p className="text-xl font-bold text-ink dark:text-secondary">
             ${formatNumber(product.price)}
           </p>
           <span
             aria-label="加入購物車"
-            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-amber-400 text-zinc-900"
+            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-accent text-accent-content transition hover:scale-110"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
