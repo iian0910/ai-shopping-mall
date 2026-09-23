@@ -3,12 +3,15 @@
 import { Suspense, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import HeartIcon from "@/components/HeartIcon";
+import EyeIcon from "@/components/EyeIcon";
+import EyeOffIcon from "@/components/EyeOffIcon";
 
 function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
 
@@ -67,15 +70,26 @@ function LoginForm() {
             <label htmlFor="password" className="text-sm font-medium text-slate-700 dark:text-slate-300">
               密碼
             </label>
-            <input
-              id="password"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="rounded-2xl border border-slate-300 px-3 py-2 text-sm outline-none focus:border-secondary dark:border-slate-700 dark:bg-slate-900"
-              placeholder="••••••••"
-              autoComplete="current-password"
-            />
+            <div className="relative">
+              <input
+                id="password"
+                type={showPassword ? "text" : "password"}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full rounded-2xl border border-slate-300 px-3 py-2 pr-10 text-sm outline-none focus:border-secondary dark:border-slate-700 dark:bg-slate-900"
+                placeholder="••••••••"
+                autoComplete="current-password"
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword((prev) => !prev)}
+                className="absolute inset-y-0 right-0 flex w-10 items-center justify-center text-slate-400 hover:text-slate-600 dark:hover:text-slate-300"
+                aria-label={showPassword ? "隱藏密碼" : "顯示密碼"}
+                tabIndex={-1}
+              >
+                {showPassword ? <EyeOffIcon className="h-4 w-4" /> : <EyeIcon className="h-4 w-4" />}
+              </button>
+            </div>
           </div>
 
           {error && <p className="text-sm text-red-600">{error}</p>}
