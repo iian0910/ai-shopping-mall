@@ -17,8 +17,8 @@ export async function POST(request: Request) {
       body,
       request,
       onBeforeGenerateToken: async (pathname) => {
-        if (!pathname.startsWith("products/")) {
-          throw new Error("圖片必須上傳到 products/ 資料夾");
+        if (!pathname.startsWith("products/") && !pathname.startsWith("articles/")) {
+          throw new Error("圖片必須上傳到 products/ 或 articles/ 資料夾");
         }
         return {
           allowedContentTypes: ["image/jpeg", "image/png", "image/webp", "image/gif"],

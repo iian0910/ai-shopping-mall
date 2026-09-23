@@ -26,6 +26,18 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             >
               新增商品
             </Link>
+            <Link
+              href="/dashboard/articles"
+              className="rounded-full px-3 py-2 text-sm font-medium text-slate-700 transition hover:-translate-y-0.5 hover:bg-primary/40 dark:text-slate-300 dark:hover:bg-slate-800"
+            >
+              文章列表
+            </Link>
+            <Link
+              href="/dashboard/articles/new"
+              className="rounded-full px-3 py-2 text-sm font-medium text-slate-700 transition hover:-translate-y-0.5 hover:bg-primary/40 dark:text-slate-300 dark:hover:bg-slate-800"
+            >
+              新增文章
+            </Link>
           </nav>
         </div>
         <LogoutButton />

@@ -90,7 +90,7 @@ export default async function Home() {
           溫柔陪伴，是我們的初衷
         </h2>
         <p className="mt-4 text-sm leading-relaxed text-slate-500 dark:text-slate-400 sm:text-base">
-          我們相信，每個孩子都值得擁有一位陪伴自己長大的好朋友。AI Shopping Mall
+          我們相信，每個孩子都值得擁有一位陪伴自己長大的好朋友。心靈療癒小窩
           用心挑選每一件絨毛玩偶，希望不論開心或難過，都有一份柔軟的擁抱，陪著你們一起成長、一起勇敢。
         </p>
       </section>

@@ -29,7 +29,7 @@ export default function Header() {
           <span className="flex h-8 w-8 items-center justify-center rounded-full bg-accent text-accent-content">
             <HeartIcon className="h-4 w-4" />
           </span>
-          AI Shopping Mall
+          心靈療癒小窩
         </Link>
         <div className="flex items-center gap-6">
           <nav className="hidden items-center gap-2 text-sm font-medium text-slate-600 dark:text-slate-300 sm:flex">
@@ -38,6 +38,9 @@ export default function Header() {
             </Link>
             <Link href="/products" className="rounded-full px-3 py-1.5 transition hover:bg-primary/20 hover:text-ink dark:hover:text-slate-50">
               所有商品
+            </Link>
+            <Link href="/articles" className="rounded-full px-3 py-1.5 transition hover:bg-primary/20 hover:text-ink dark:hover:text-slate-50">
+              文章
             </Link>
           </nav>
           <span
