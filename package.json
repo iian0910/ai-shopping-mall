@@ -10,7 +10,8 @@
     "seed": "tsx scripts/seed.ts",
     "seed:images": "tsx scripts/upload-product-images.ts",
     "seed:admin": "tsx scripts/seed-admin.ts",
-    "seed:articles": "tsx scripts/seed-articles.ts"
+    "seed:articles": "tsx scripts/seed-articles.ts",
+    "seed:popularity": "tsx scripts/seed-popularity.ts"
   },
   "dependencies": {
     "@vercel/blob": "^2.8.0",

@@ -50,3 +50,34 @@ export async function getProducts({
     category: normalizedCategory,
   };
 }
+
+// 熱門商品：依熱門度百分比由高到低排序，同分時以較新上架的商品優先。
+export async function getPopularProducts(limit = 4): Promise<IProduct[]> {
+  await connectToDatabase();
+
+  return Product.find({})
+    .sort({ popularity: -1, createdAt: -1 })
+    .limit(limit)
+    .lean<IProduct[]>();
+}
+
+// 台灣固定 UTC+8、無日光節約時間，直接用位移計算即可，不受伺服器時區影響。
+const TAIPEI_OFFSET_MS = 8 * 60 * 60 * 1000;
+
+function getTaipeiStartOfMonth(now = new Date()): Date {
+  const taipeiNow = new Date(now.getTime() + TAIPEI_OFFSET_MS);
+  const startUtc = Date.UTC(taipeiNow.getUTCFullYear(), taipeiNow.getUTCMonth(), 1);
+  return new Date(startUtc - TAIPEI_OFFSET_MS);
+}
+
+// 本月新品：只取本月 1 日（台灣時間）之後上架的商品，依上架時間由新到舊排序。
+export async function getNewArrivals(limit = 4): Promise<IProduct[]> {
+  await connectToDatabase();
+
+  const startOfMonth = getTaipeiStartOfMonth();
+
+  return Product.find({ createdAt: { $gte: startOfMonth } })
+    .sort({ createdAt: -1 })
+    .limit(limit)
+    .lean<IProduct[]>();
+}

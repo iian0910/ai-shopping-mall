@@ -1,8 +1,15 @@
 import Link from "next/link";
 import type { IProduct } from "@/models/Product";
 import { formatNumber } from "@/lib/format";
+import StarRating from "@/components/StarRating";
 
-export default function ProductCard({ product }: { product: IProduct }) {
+export default function ProductCard({
+  product,
+  showPopularity = false,
+}: {
+  product: IProduct;
+  showPopularity?: boolean;
+}) {
   return (
     <Link
       href={`/products/${product._id}`}
@@ -26,6 +33,7 @@ export default function ProductCard({ product }: { product: IProduct }) {
         <span className="mt-1.5 inline-block w-fit rounded-full bg-support/25 px-2 py-0.5 text-[11px] font-medium text-ink dark:bg-slate-800 dark:text-slate-300">
           {product.category}
         </span>
+        {showPopularity && <StarRating popularity={product.popularity} className="mt-2" />}
 
         <div className="mt-auto flex items-center justify-between pt-4">
           <p className="text-xl font-bold text-ink dark:text-secondary">

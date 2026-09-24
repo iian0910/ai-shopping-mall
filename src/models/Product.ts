@@ -12,6 +12,7 @@ export interface IProduct {
   description?: string;
   quantity: number;
   category: ProductCategory;
+  popularity: number;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -41,6 +42,13 @@ const ProductSchema = new Schema<IProduct>(
       type: String,
       required: true,
       enum: PRODUCT_CATEGORIES,
+    },
+    // 熱門度百分比（0–100）。尚未串接金流，目前由 scripts/seed-popularity.ts 寫入固定值。
+    popularity: {
+      type: Number,
+      default: 0,
+      min: [0, "熱門度不可小於 0"],
+      max: [100, "熱門度不可大於 100"],
     },
   },
   { timestamps: true }

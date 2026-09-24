@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getProducts } from "@/lib/products";
+import { getNewArrivals, getPopularProducts } from "@/lib/products";
 import { PRODUCT_CATEGORIES } from "@/lib/constants";
 import ProductCard from "@/components/ProductCard";
 import HeartIcon from "@/components/HeartIcon";
@@ -43,7 +43,10 @@ const VALUE_PROPS = [
 ];
 
 export default async function Home() {
-  const { products: featuredProducts } = await getProducts({ limit: 4 });
+  const [popularProducts, newArrivals] = await Promise.all([
+    getPopularProducts(4),
+    getNewArrivals(4),
+  ]);
 
   return (
     <div>
@@ -95,14 +98,40 @@ export default async function Home() {
         </p>
       </section>
 
+      {newArrivals.length > 0 && (
+        <section className="mx-auto w-full max-w-[1120px] px-4 py-16 sm:px-6 lg:px-8">
+          <div className="mb-8 flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <span className="mb-2 inline-flex items-center gap-1 rounded-full bg-support/25 px-3 py-1 text-xs font-semibold text-ink ring-1 ring-support/40 dark:bg-support/20 dark:text-support dark:ring-support/40">
+                <HeartIcon className="h-3 w-3" />
+                NEW
+              </span>
+              <h2 className="text-2xl font-bold text-ink dark:text-slate-50">本月新品</h2>
+            </div>
+            <Link
+              href="/products"
+              className="rounded-full border border-primary/40 px-4 py-2 text-sm font-medium text-ink/80 transition hover:bg-primary/15 hover:text-ink dark:border-slate-700 dark:text-slate-300 dark:hover:text-slate-50"
+            >
+              查看全部 →
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {newArrivals.map((product) => (
+              <ProductCard key={String(product._id)} product={product} />
+            ))}
+          </div>
+        </section>
+      )}
+
       <section className="mx-auto w-full max-w-[1120px] px-4 py-16 sm:px-6 lg:px-8">
         <div className="mb-8 flex flex-wrap items-center justify-between gap-3">
           <div>
             <span className="mb-2 inline-flex items-center gap-1 rounded-full bg-accent/15 px-3 py-1 text-xs font-semibold text-accent-content ring-1 ring-accent/30 dark:bg-accent/20 dark:text-accent dark:ring-accent/40">
               <HeartIcon className="h-3 w-3" />
-              本週嚴選
+              人氣推薦
             </span>
-            <h2 className="text-2xl font-bold text-ink dark:text-slate-50">精選商品</h2>
+            <h2 className="text-2xl font-bold text-ink dark:text-slate-50">熱門商品</h2>
           </div>
           <Link
             href="/products"
@@ -112,10 +141,10 @@ export default async function Home() {
           </Link>
         </div>
 
-        {featuredProducts.length > 0 ? (
+        {popularProducts.length > 0 ? (
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {featuredProducts.map((product) => (
-              <ProductCard key={String(product._id)} product={product} />
+            {popularProducts.map((product) => (
+              <ProductCard key={String(product._id)} product={product} showPopularity />
             ))}
           </div>
         ) : (
